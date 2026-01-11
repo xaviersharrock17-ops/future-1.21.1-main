@@ -1,0 +1,9 @@
+pluginManagement {
+	repositories {
+		gradlePluginPortal()
+		maven { url = 'https://maven.fabricmc.net/' }
+		maven { url = 'https://maven.fabricmc.net/snapshots/' }
+	}
+}
+
+rootProject.name = "future-1.21.11"

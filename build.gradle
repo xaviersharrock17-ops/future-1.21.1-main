@@ -5,10 +5,6 @@ plugins {
 version = project.hasProperty('mod_version') ? project.mod_version : '1.0.0'
 group = project.hasProperty('maven_group') ? project.maven_group : 'com.example'
 
-base {
-	archivesName.set(project.hasProperty('archives_base_name') ? project.archives_base_name : 'future')
-}
-
 repositories {
 	mavenCentral()
 	maven { url = 'https://maven.fabricmc.net/' }
@@ -22,29 +18,19 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:0.141.1+1.21.11"
 }
 
-processResources {
-	inputs.property "version", project.version
-	filesMatching("fabric.mod.json") {
-		expand "version": project.version
-	}
-}
-
-tasks.withType(JavaCompile).configureEach {
-	it.options.release.set(21) // Target Java 21
-}
-
 java {
+	toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 	sourceCompatibility = JavaVersion.VERSION_21
 	targetCompatibility = JavaVersion.VERSION_21
 }
 
-loom {
-	runs {
-		client {
-			runDir = "run"
-		}
-		server {
-			runDir = "runServer"
-		}
+tasks.withType(JavaCompile).configureEach {
+	it.options.release.set(21)
+}
+
+processResources {
+	inputs.property "version", project.version
+	filesMatching("fabric.mod.json") {
+		expand "version": project.version
 	}
 }

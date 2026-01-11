@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "priority": 2147483647,
+  "mixinPriority": 2147483647,
+  "minVersion": "0.8.5",
+  "plugin": "nick.Main",
+  "verbose": true,
+  "client": [
+    "mixins.client.json"
+  ],
+  "server": [
+    "mixins.server.json"
+  ]
+}
